@@ -1,6 +1,6 @@
 from typing import Dict
 
-def dimensionTeamETL(config: Dict[str, Dict[str, str]]) -> Dict[int, int]:
+def dimensionTeamETL(config: Dict[str, str]) -> Dict[int, int]:
     print("Team ETL")
 
     return {

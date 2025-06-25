@@ -1,6 +1,6 @@
 from typing import Dict
 
-def dimensionGameETL(config: Dict[str, Dict[str, str]],  mapTeamIdToSK:Dict[int, int] ) -> Dict[int, int]:
+def dimensionGameETL(config: Dict[str, str],  mapTeamIdToSK:Dict[int, int] ) -> Dict[int, int]:
     print("Game ETL")
 
 

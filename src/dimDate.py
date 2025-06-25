@@ -1,4 +1,3 @@
-# dimDate.py
 import pandas as pd
 import holidays
 from datetime import date
@@ -48,9 +47,9 @@ def generate_date_dimension(start_date: date, end_date: date) -> pd.DataFrame:
         logging.error(f"Error generating date dimension: {str(e)}")
         raise
 
-def dimensionDateETL(config: Dict[str, str]) -> Dict[date, int]:
+def dimensionDateCreation(config: Dict[str, str]) -> Dict[date, int]:
     """
-    ETL process for date dimension
+    Creates date dimension
     
     Args:
         config: Configuration dictionary

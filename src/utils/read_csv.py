@@ -18,7 +18,6 @@ def read_csv_file(file_path: str, dtype: Dict[str, Union[str, int, float]] = Non
             file_path,
             dtype=dtype,
             parse_dates=True,
-            infer_datetime_format=True,
             low_memory=False
         )
         logging.info(f"Successfully loaded {len(df)} records from {file_path}")

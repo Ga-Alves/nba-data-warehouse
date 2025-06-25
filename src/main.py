@@ -1,6 +1,6 @@
 import configparser
 from typing import Dict
-from dimDate import dimensionDateETL
+from dimDate import dimensionDateCreation
 from dimGame import dimensionGameETL
 from dimPlayer import dimensionPlayerETL
 from dimTeam import dimensionTeamETL
@@ -30,7 +30,7 @@ def main():
         
         # TODO: parallelize this
         # Parallel ETL processes
-        date_mapping = dimensionDateETL(config['database'])
+        date_mapping = dimensionDateCreation(config['database'])
         player_mapping = dimensionPlayerETL(config['database'])
         
         # Sequential steps with dependencies
@@ -40,7 +40,7 @@ def main():
         # Fact table with all mappings
         factETL(
             config['database'],
-            date_mapping=date_mapping,
+            date_mapping={},
             player_mapping=player_mapping,
             team_mapping=team_mapping,
             game_mapping=game_mapping
