@@ -1,0 +1,5 @@
+[postgres]
+host = localhost
+user = postgres
+password = postgres
+databaseName = NBA_DB
