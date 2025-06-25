@@ -1,7 +1,7 @@
 # 🏀 NBA Data Analysis Project  
 
 ### 📂 **Dataset Setup**  
-Place your NBA dataset (CSV file) in the project directory.  
+Place your NBA dataset (CSV file) here.
 
 #### 💾 **Need Data?**  
 If you don’t have the dataset yet, download it from:  
