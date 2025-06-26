@@ -40,7 +40,7 @@ def main():
         # Fact table with all mappings
         factETL(
             config['database'],
-            date_mapping={},
+            date_mapping=date_mapping,
             player_mapping=player_mapping,
             team_mapping=team_mapping,
             game_mapping=game_mapping
