@@ -37,7 +37,6 @@ def dimensionPlayerETL(config:  Dict[str, str]) -> Dict[int, int]:
             df=df_save,
             table_name='dim_player',
             config=config,
-            if_exists='replace'
         )
 
         logging.info(f"Successfully processed {len(df_save)} players")

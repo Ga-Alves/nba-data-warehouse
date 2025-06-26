@@ -70,7 +70,6 @@ def dimensionDateCreation(config: Dict[str, str]) -> Dict[date, int]:
             df=date_df,
             table_name='dim_date',
             config=config,
-            if_exists='replace'
         )
         
         # Create mapping dictionary
