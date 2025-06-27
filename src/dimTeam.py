@@ -17,7 +17,7 @@ def dimensionTeamETL(config: Dict[str, str], location_mapping: Dict[str, int]) -
     """
     try:
         # Read team data from CSV
-        df = read_csv_file('./data/teams.csv', {
+        df = read_csv_file('../data/teams.csv', {
             'TEAM_ID': int,
             'MIN_YEAR': int,
             'MAX_YEAR': int,

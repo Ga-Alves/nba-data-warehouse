@@ -22,7 +22,7 @@ def factETL(config: Dict[str, str], date_mapping: Dict[date, int], player_mappin
         logging.info("Starting fact table ETL process...")
         
         # Read games_details.csv file
-        df = read_csv_file('./data/games_details.csv', {
+        df = read_csv_file('../data/games_details.csv', {
             'GAME_ID': int,
             'TEAM_ID': int,
             'TEAM_ABBREVIATION': str,
@@ -75,7 +75,7 @@ def factETL(config: Dict[str, str], date_mapping: Dict[date, int], player_mappin
         
         # For date mapping, we need to get the game date from the games.csv
         # First, let's read the games.csv to get the mapping of GAME_ID to GAME_DATE_EST
-        games_df = read_csv_file('./data/games.csv', {
+        games_df = read_csv_file('../data/games.csv', {
             'GAME_ID': int,
             'GAME_DATE_EST': str
         })
@@ -89,7 +89,7 @@ def factETL(config: Dict[str, str], date_mapping: Dict[date, int], player_mappin
         df['date_surrogate_id'] = df['game_date'].map(date_mapping)
         
         # Get location information from teams.csv to map location_id
-        teams_df = read_csv_file('./data/teams.csv', {
+        teams_df = read_csv_file('../data/teams.csv', {
             'TEAM_ID': int,
             'CITY': str,
             'ARENA': str

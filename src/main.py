@@ -11,7 +11,7 @@ from factPlayerGameStatistics import factETL
 def load_config() -> Dict[str, Dict[str, str]]:
     """Load configuration from config.ini"""
     config = configparser.ConfigParser()
-    config.read('src/config.ini')
+    config.read('config.ini')
     return {
         'database': {
             'host': config['postgres']['host'],

@@ -17,7 +17,7 @@ def dimensionGameETL(config: Dict[str, str], team_mapping: Dict[int, int]) -> Di
     """
     try:
         # Lê o arquivo games.csv
-        df = read_csv_file('./data/games.csv', {
+        df = read_csv_file('../data/games.csv', {
             'GAME_ID': int,
             'SEASON': int,
             'HOME_TEAM_ID': int,

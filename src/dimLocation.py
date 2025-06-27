@@ -16,7 +16,7 @@ def dimensionLocationETL(config: Dict[str, str]) -> Dict[str, int]:
     """
     try:
         # Read team data from CSV to extract location information
-        df = read_csv_file('./data/teams.csv', {
+        df = read_csv_file('../data/teams.csv', {
             'TEAM_ID': int,
             'CITY': str,
             'ARENA': str,
