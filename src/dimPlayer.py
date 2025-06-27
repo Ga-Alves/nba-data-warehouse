@@ -16,7 +16,7 @@ def dimensionPlayerETL(config:  Dict[str, str]) -> Dict[int, int]:
     """
     try:
         # Read player data from CSV
-        df = read_csv_file('../data/players.csv', {
+        df = read_csv_file('./data/players.csv', {
             'PLAYER_NAME': str,
             'TEAM_ID': int,
             'PLAYER_ID': int,

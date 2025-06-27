@@ -4,19 +4,20 @@ from utils.read_csv import read_csv_file
 from utils.save_to_postgres import save_to_postgres
 import logging
 
-def dimensionTeamETL(config: Dict[str, str]) -> Dict[int, int]:
+def dimensionTeamETL(config: Dict[str, str], location_mapping: Dict[str, int]) -> Dict[int, int]:
     """
     ETL process for team dimension
     
     Args:
         config: Configuration dictionary containing database connection info
+        location_mapping: Dictionary mapping location key to location dimension surrogate key
         
     Returns:
         Dictionary mapping original team_id to surrogate key (id)
     """
     try:
         # Read team data from CSV
-        df = read_csv_file('../data/teams.csv', {
+        df = read_csv_file('./data/teams.csv', {
             'TEAM_ID': int,
             'MIN_YEAR': int,
             'MAX_YEAR': int,
@@ -34,6 +35,10 @@ def dimensionTeamETL(config: Dict[str, str]) -> Dict[int, int]:
 
         df["ARENACAPACITY"] = df["ARENACAPACITY"].fillna(-1).astype(int)
 
+        # Map location to location dimension surrogate key
+        df['location_key'] = df['CITY'] + '|' + df['ARENA']
+        df['location_id'] = df['location_key'].map(location_mapping)
+
         # Create DataFrame with desired columns
         df_save = pd.DataFrame({
             "team_id": df["TEAM_ID"],
@@ -42,9 +47,7 @@ def dimensionTeamETL(config: Dict[str, str]) -> Dict[int, int]:
             "abbreviation": df["ABBREVIATION"],
             "nickname": df["NICKNAME"],
             "founded_year": df["YEARFOUNDED"],
-            "city": df["CITY"],
-            "arena": df["ARENA"],
-            "arena_capacity": df["ARENACAPACITY"],
+            "location_id": df["location_id"],
             "last_owner": df["OWNER"],
             "general_manager": df["GENERALMANAGER"],
             "head_coach": df["HEADCOACH"],

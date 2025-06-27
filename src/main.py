@@ -4,13 +4,14 @@ from dimDate import dimensionDateCreation
 from dimGame import dimensionGameETL
 from dimPlayer import dimensionPlayerETL
 from dimTeam import dimensionTeamETL
+from dimLocation import dimensionLocationETL
 from factPlayerGameStatistics import factETL
 
 
 def load_config() -> Dict[str, Dict[str, str]]:
     """Load configuration from config.ini"""
     config = configparser.ConfigParser()
-    config.read('config.ini')
+    config.read('src/config.ini')
     return {
         'database': {
             'host': config['postgres']['host'],
@@ -22,19 +23,18 @@ def load_config() -> Dict[str, Dict[str, str]]:
     }
 
 def main():
-    try:
-        # Load configuration
+    try:        
         config = load_config()
-        
         print("Starting ETL process")
         
         # TODO: parallelize this
         # Parallel ETL processes
         date_mapping = dimensionDateCreation(config['database'])
         player_mapping = dimensionPlayerETL(config['database'])
+        location_mapping = dimensionLocationETL(config['database'])
         
         # Sequential steps with dependencies
-        team_mapping = dimensionTeamETL(config['database'])
+        team_mapping = dimensionTeamETL(config['database'], location_mapping)
         game_mapping = dimensionGameETL(config['database'], team_mapping)
         
         # Fact table with all mappings
@@ -43,7 +43,8 @@ def main():
             date_mapping=date_mapping,
             player_mapping=player_mapping,
             team_mapping=team_mapping,
-            game_mapping=game_mapping
+            game_mapping=game_mapping,
+            location_mapping=location_mapping
         )
         
         print("ETL process completed successfully")
