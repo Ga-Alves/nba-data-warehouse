@@ -150,7 +150,7 @@ def factETL(config: Dict[str, str], date_mapping: Dict[date, int], player_mappin
             'three_goals_average': df['FG3_PCT'].fillna(0.0),
             
             # Free throws
-            'free_throwss_made': df['FTM'].fillna(0).astype(int),
+            'free_throws_made': df['FTM'].fillna(0).astype(int),
             'free_throws_attempt': df['FTA'].fillna(0).astype(int),
             'free_throws_average': df['FT_PCT'].fillna(0.0),
             
@@ -187,22 +187,11 @@ def factETL(config: Dict[str, str], date_mapping: Dict[date, int], player_mappin
             
             logging.info(f"Saving batch {i//batch_size + 1}: records {i+1} to {batch_end}")
             
-            # For the first batch, create/replace the table. For subsequent batches, append
-            if i == 0:
-                save_to_postgres(
-                    df=batch_df,
-                    table_name='fact_player_game_statistics',
-                    config=config,
-                    if_exists='replace'
-                )
-            else:
-                # For subsequent batches, append to the existing table
-                save_to_postgres(
-                    df=batch_df,
-                    table_name='fact_player_game_statistics',
-                    config=config,
-                    if_exists='append'
-                )
+            save_to_postgres(
+                df=batch_df,
+                table_name='fact_player_game_statistics',
+                config=config
+            )
             
             # Clear memory
             del batch_df
