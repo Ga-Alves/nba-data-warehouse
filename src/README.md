@@ -11,6 +11,7 @@ Create a new file named `config.ini` using `config.ini.example` as a reference b
 
 ### 3. Create DB tables
 Use the file `data_base/NBA-modeling.SQL` to create tables.
+Then, use the file `data_base/views.SQL` to create views for Apache Supertset analysis.
 
 ### 4. **Run the Project** ▶️  
 Start the application by executing:  
