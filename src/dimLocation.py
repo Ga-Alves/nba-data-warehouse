@@ -24,7 +24,7 @@ def dimensionLocationETL(config: Dict[str, str]) -> Dict[str, int]:
         })
 
         # Handle missing arena capacity values
-        df["ARENACAPACITY"] = df["ARENACAPACITY"].fillna(-1).astype(int)
+        df["ARENACAPACITY"] = df["ARENACAPACITY"].fillna().astype(int)
 
         # Create unique locations by grouping by city and arena
         # Some cities might have multiple arenas, so we keep them separate
@@ -42,12 +42,13 @@ def dimensionLocationETL(config: Dict[str, str]) -> Dict[str, int]:
         df_save.reset_index(drop=True, inplace=True)
 
         # Save to PostgreSQL
-        save_to_postgres(
-            df=df_save,
-            table_name='dim_location',
-            config=config,
-        )
+        # save_to_postgres(
+        #     df=df_save,
+        #     table_name='dim_location',
+        #     config=config,
+        # )
 
+        df_save.to_csv('../data/derived/dim_location.csv', index=False)
         logging.info(f"Successfully processed {len(df_save)} locations")
 
         # Return mapping {city + arena -> id}

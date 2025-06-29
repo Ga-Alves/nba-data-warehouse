@@ -58,12 +58,12 @@ def dimensionTeamETL(config: Dict[str, str], location_mapping: Dict[str, int]) -
         df_save['id'] = df_save.reset_index().index + 1
 
         # Save to PostgreSQL
-        save_to_postgres(
-            df=df_save,
-            table_name='dim_team',
-            config=config,
-        )
-
+        # save_to_postgres(
+        #     df=df_save,
+        #     table_name='dim_team',
+        #     config=config,
+        # )
+        df_save.to_csv('../data/derived/dim_team.csv', index=False)
         logging.info(f"Successfully processed {len(df_save)} teams")
 
         # Return mapping {team_id original -> id substituta}

@@ -174,7 +174,10 @@ def factETL(config: Dict[str, str], date_mapping: Dict[date, int], player_mappin
         # Process in batches to avoid memory issues
         batch_size = 10000  # Process 10K records at a time
         total_records = len(fact_df)
+
+        fact_df.to_csv('../data/derived/fact_player_game_statistics.csv', index=False)
         
+         
         logging.info(f"Processing {total_records} records in batches of {batch_size}")
         
         # Save to database in batches
@@ -187,11 +190,11 @@ def factETL(config: Dict[str, str], date_mapping: Dict[date, int], player_mappin
             
             logging.info(f"Saving batch {i//batch_size + 1}: records {i+1} to {batch_end}")
             
-            save_to_postgres(
-                df=batch_df,
-                table_name='fact_player_game_statistics',
-                config=config
-            )
+            # save_to_postgres(
+            #     df=batch_df,
+            #     table_name='fact_player_game_statistics',
+            #     config=config
+            # )
             
             # Clear memory
             del batch_df

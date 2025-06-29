@@ -33,12 +33,12 @@ def dimensionPlayerETL(config:  Dict[str, str]) -> Dict[int, int]:
         df_save['id'] = df_save.reset_index().index + 1
 
         # Save to database
-        save_to_postgres(
-            df=df_save,
-            table_name='dim_player',
-            config=config,
-        )
-
+        # save_to_postgres(
+        #     df=df_save,
+        #     table_name='dim_player',
+        #     config=config,
+        # )
+        df_save.to_csv('../data/derived/dim_player.csv', index=False)
         logging.info(f"Successfully processed {len(df_save)} players")
         
         # Create and return mapping dictionary {original_id: surrogate_key}

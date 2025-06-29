@@ -66,12 +66,13 @@ def dimensionDateCreation(config: Dict[str, str]) -> Dict[date, int]:
         date_df = generate_date_dimension(start_date, end_date)
         
         # Save to database
-        save_to_postgres(
-            df=date_df,
-            table_name='dim_date',
-            config=config,
-        )
+        # save_to_postgres(
+        #     df=date_df,
+        #     table_name='dim_date',
+        #     config=config,
+        # )
         
+        date_df.to_csv('../data/derived/dim_date.csv', index=False)
         # Create mapping dictionary
         date_mapping = dict(zip(date_df['date'], date_df['id']))
         
